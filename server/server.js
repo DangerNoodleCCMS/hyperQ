@@ -6,9 +6,11 @@ const cors = require('cors');
 const app = express();
 const PORT = 3000;
 
+
 //  import  routers
 const userRouter = require('./routes/user');
 const apiRouter = require('./routes/api');
+
 // const Controller = require('./controllers/mediaController');
 
 //  Connect mongo database
@@ -36,6 +38,7 @@ app.use(cors({
 
 app.use('/user', userRouter);
 app.use('/api', apiRouter);
+
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));

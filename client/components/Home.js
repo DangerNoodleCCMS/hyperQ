@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Card from './Card';
+import Options from './Options';
 
-const Card = () => {
+
+const Home = () => {
     return (
   <div>
-      Card 
+    HOME PAGE
   </div>
     )
 }
 
-export default Card;
+export default Home;

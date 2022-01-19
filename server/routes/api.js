@@ -1,9 +1,11 @@
-const express = require('express');
+// const express = require('express');
 
 const imdbController = require('../controllers/imdbController');
 const dbController = require('../controllers/dbController');
 
-const router = express.Router();
+
+// const router = express.Router();
+
 
 router.post('/getMediaList',
     imdbController.getMovieMatches,
@@ -18,6 +20,7 @@ router.post('/addMedia',
     (req, res) => res.status(200).json(res.locals.mediaDetail)
 );
 
+
 // router.patch('/:media', mediaController.updateMedia, (req, res) => res.status(200).json(res.locals.updatedMedia)
 // );
 
@@ -27,4 +30,4 @@ router.post('/addMedia',
 //   res.status(200).send();
 // });
 
-module.exports = router;
+// module.exports = router;

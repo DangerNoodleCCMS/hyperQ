@@ -58,6 +58,7 @@ userController.login = async (req, res, next) => {
 
         res.locals.id = user.id;
 
+
         const priorityLists = {};
 
         //  Query and get all the list of the user
@@ -73,6 +74,7 @@ userController.login = async (req, res, next) => {
                     "items": [],
                 };
             }
+
             if (sqlResponse.rows[i].title !== null) {
                 const genresArr = sqlResponse.rows[i].genres.split(", ");
                 const genres = {};
@@ -92,6 +94,7 @@ userController.login = async (req, res, next) => {
                 priorityLists[sqlResponse.rows[i].list_name].items.push(item);
             }
         }
+
         // console.log(priorityLists);
         res.locals.priorityLists = priorityLists;
         next();
