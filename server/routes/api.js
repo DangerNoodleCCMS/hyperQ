@@ -1,18 +1,22 @@
-// const express = require('express');
+const express = require('express');
 
-// const mediaController = require('../controllers/mediaController');
+const imdbController = require('../controllers/imdbController');
+const dbController = require('../controllers/dbController');
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.get('/',
-//   mediaController.getList,
-//   (req, res) => res.status(200).json(res.locals.media)
-// );
+router.post('/getMediaList',
+    imdbController.getMovieMatches,
+    (req, res) => res.sendStatus(200)
+);
 
-// router.post('/',
-//   mediaController.addMedia,
-//   (req, res) => res.status(200).json(res.locals.mediaItem)
-// );
+router.post('/addMedia',
+    imdbController.getMediaDetail,
+    dbController.createMediaMongoDoc,
+    dbController.createMediaSQL,
+    dbController.insertMediaPriority,
+    (req, res) => res.status(200).json(res.locals.mediaDetail)
+);
 
 // router.patch('/:media', mediaController.updateMedia, (req, res) => res.status(200).json(res.locals.updatedMedia)
 // );
@@ -23,4 +27,4 @@
 //   res.status(200).send();
 // });
 
-// module.exports = router;
+module.exports = router;
