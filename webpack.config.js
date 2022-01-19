@@ -56,7 +56,7 @@ module.exports = {
     // compress: true,
     port: 8080,
     proxy: {
-      '/api/leaders': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     },
   },
   performance: {
