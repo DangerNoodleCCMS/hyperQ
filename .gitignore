@@ -6,3 +6,5 @@ dist/
 .cache/
 coverage/
 .parcel-cache
+package-lock.json
+

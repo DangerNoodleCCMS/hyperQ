@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const User = require('../models/userModel');
 const db = require('../models/sqlModel');
 
@@ -45,23 +43,55 @@ userController.login = async (req, res, next) => {
 
     try {
         //  find user document in mongodb
-        const mongoResponse = await User.findOne({ username, password });
-        res.locals.id = mongoResponse.id;
+        const user = await User.findOne({ username });
+
+        //  Validate the password
+        const isMatching = await user.validatePassword(password);
+
+        if(!isMatching){
+            res.locals.creationErr = 'Invalid username or password';
+            return next({
+                        log: 'Express error handler caught an error in the login middleware',
+                        message: { err: 'An error occurred in login middleware' }
+                      });
+        } 
+
+        res.locals.id = user.id;
+
 
         const priorityLists = {};
 
         //  Query and get all the list of the user
-        const listQuery = 'SELECT pl.* FROM priority_lists pl LEFT JOIN media_priority_lists mpl ON pl.id = mpl.list_id LEFT JOIN media m ON mpl.media_id = m.id LEFT JOIN genres g ON m.genre_id = g.id LEFT JOIN categories c ON m.category_id = c.id WHERE pl.user_id = $1';
-        
+        const listQuery = 'SELECT pl.id, pl.name AS list_name, m.title, m.year, m.genres, m.type, m.length, mpl.priority, m.mongo_id, m.id AS SQL_id FROM priority_lists pl LEFT JOIN media_priority_lists mpl ON pl.id = mpl.list_id LEFT JOIN media m ON mpl.media_id = m.id WHERE pl.user_id = $1';
+
         const sqlResponse = await db.query(listQuery, [res.locals.id]);
 
         //  Construct the list object ------------ To be finished
         for (let i = 0; i < sqlResponse.rows.length; i++) {
-            if (priorityLists[sqlResponse.rows[i].name] === undefined){
-                priorityLists[sqlResponse.rows[i].name] = {
+            if (priorityLists[sqlResponse.rows[i].list_name] === undefined) {
+                priorityLists[sqlResponse.rows[i].list_name] = {
                     "id": sqlResponse.rows[i].id,
                     "items": [],
                 };
+            }
+
+            if (sqlResponse.rows[i].title !== null) {
+                const genresArr = sqlResponse.rows[i].genres.split(", ");
+                const genres = {};
+                for (let i = 0; i < genresArr.length; i++){
+                    genres[genresArr[i]] = true;
+                }
+                const item = {
+                    "title": sqlResponse.rows[i].title,
+                    "year": sqlResponse.rows[i].year,
+                    "type": sqlResponse.rows[i].type,
+                    "genres": genres,
+                    "length": sqlResponse.rows[i].length,
+                    "priority": sqlResponse.rows[i].priority,
+                    "SQLId": sqlResponse.rows[i].SQL_id,
+                    "mongoId": sqlResponse.rows[i].mongo_id,
+                };
+                priorityLists[sqlResponse.rows[i].list_name].items.push(item);
             }
         }
 
