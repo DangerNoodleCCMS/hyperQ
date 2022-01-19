@@ -7,8 +7,8 @@ const app = express();
 const PORT = 3000;
 
 //  import the routers
-const apiRouter = require('./routes/api');
-const mediaController = require('./controllers/mediaController');
+const userRouter = require('./routes/user');
+// const Controller = require('./controllers/mediaController');
 
 //  Connect mongo database
 const MONGO_URI = 'mongodb+srv://dangernoodle:dangernoodle@iterationproject.thynf.mongodb.net/iterationProject?retryWrites=true&w=majority';
@@ -33,7 +33,7 @@ app.use(cors({
   origin: '*'
 }));
 
-app.use('/api', apiRouter);
+app.use('/user', userRouter);
 
 // catch-all route handler for any requests to an unknown route
 app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));

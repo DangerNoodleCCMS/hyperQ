@@ -1,9 +1,3 @@
-CREATE TABLE "users"(
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR(255) NOT NULL,
-    "mongo_id" INTEGER NOT NULL
-);
-
 CREATE TABLE "media"(
     "id" SERIAL PRIMARY KEY,
     "title" VARCHAR(255) NOT NULL,
@@ -16,7 +10,7 @@ CREATE TABLE "media"(
 CREATE TABLE "priority_lists"(
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR(255) NOT NULL,
-    "user_id" INTEGER NOT NULL
+    "user_id" VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE "media_priority_lists"(
@@ -36,8 +30,6 @@ CREATE TABLE "categories"(
     "name" INTEGER NOT NULL
 );
 
-ALTER TABLE
-    "priority_lists" ADD CONSTRAINT "priority_lists_user_id_foreign" FOREIGN KEY("user_id") REFERENCES "users"("id");
 ALTER TABLE
     "media_priority_lists" ADD CONSTRAINT "media_priority_lists_media_id_foreign" FOREIGN KEY("media_id") REFERENCES "media"("id");
 ALTER TABLE
