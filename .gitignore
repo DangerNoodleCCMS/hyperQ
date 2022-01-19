@@ -1,4 +1,8 @@
 node_modules
-build/*.js
-npm-debug.log
+dist/
+.env
 .DS_Store
+.vscode/
+.cache/
+coverage/
+.parcel-cache

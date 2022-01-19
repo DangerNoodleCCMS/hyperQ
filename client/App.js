@@ -1,31 +1,29 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import Header from './components/Header';
-import List from './components/List.js';
-import DurationDropdown from './components/DurationDropdown';
+import { BrowserRouter as Router, Routes, Route, Link, Switch } from 'react-router-dom'
+import Login from './components/Login'
+import Home from './components/Home'
+import { useSelector } from 'react-redux';
+import Signup from './components/Signup';
+import {login } from './actions/functions'
+import {connect} from 'react-redux'
 
-
-// const allMedia = [ { media_id: 2, title: "silicon valley", category: "show", duration: 30, priority: 1, url: null, user_id: 1 }, { media_id: 3, title: "queen's gambit" category: "show", duration: 30, priority: 1, url: null, user_id: 1 }, ]
 
 function App() {
 
-  const [allMedia, setAllMedia] = useState([]);
-
-  // https://dmitripavlutin.com/react-useeffect-explanation/
-  useEffect(() => {
-    async function fetchMedia() {
-      const response = await fetch('http://localhost:3000/api/');
-      const fetchedMedia = await response.json(response);
-      setAllMedia(fetchedMedia);
-    }
-    fetchMedia();
-  }, []);
+  const loggedIn = useSelector(state => state.loggedIn);
+  
+  // useEffect( () => {
+  //   dispatchEvent(login({name: "REI"}));
+  // }, [])
 
   return (
-    <div className='wrapper'>
-      <Header />
-      {/* <div className='tabContainer'><DurationDropdown /></div> */}
-     
-      <List allMedia={allMedia} />
+
+    <div >
+      <Routes>
+        <Route path="/" element={<Login />}></ Route>
+        <Route path="/signup" element={<Signup />}></ Route>
+        <Route path="/home"  element={<Home />}></ Route>
+     </Routes>
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
-const Card = () => {
+const Options = () => {
     return (
   <div>
-      Card 
+      <Card />
+      Options
   </div>
     )
 }
 
-export default Card;
+export default Options;
