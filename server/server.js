@@ -1,20 +1,25 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
+const PORT = 3000;
 
+//  import the routers
 const apiRouter = require('./routes/api');
 const mediaController = require('./controllers/mediaController');
 
-const PORT = 3000;
+//  Connect mongo database
+const MONGO_URI = 'mongodb+srv://dangernoodle:dangernoodle@iterationproject.thynf.mongodb.net/iterationProject?retryWrites=true&w=majority';
+mongoose.connect(MONGO_URI, {dbName: 'iterationProject'});
 
 // handle parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // serving static files
-app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
 /**
  * define route handlers
@@ -41,7 +46,7 @@ app.use((req, res) => res.status(404).send('This is not the page you\'re looking
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
-    status: 500,
+    status: 404,
     message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
