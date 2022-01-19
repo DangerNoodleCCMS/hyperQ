@@ -9,7 +9,7 @@ const mediaSchema = new Schema({
     plot: { type: String, required: true },
     genres: [{ type: String, required: true }],
     rating: { type: Number, required: true },
-    contentRating: { type: String, required: true },
+    contentRating: { type: String },
     awards: String,
     directors: [{ type: String, required: true }],
     stars: [{ type: String, required: true }],
