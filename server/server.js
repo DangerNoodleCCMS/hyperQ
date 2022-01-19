@@ -1,21 +1,18 @@
-const path = require('path');
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
 
-
 //  import  routers
 const userRouter = require('./routes/user');
 const apiRouter = require('./routes/api');
 
-// const Controller = require('./controllers/mediaController');
-
 //  Connect mongo database
 const MONGO_URI = 'mongodb+srv://dangernoodle:dangernoodle@iterationproject.thynf.mongodb.net/iterationProject?retryWrites=true&w=majority';
-mongoose.connect(MONGO_URI, {dbName: 'iterationProject'});
+mongoose.connect(MONGO_URI, { dbName: 'iterationProject' });
 
 // handle parsing request body
 app.use(express.json());
@@ -23,31 +20,21 @@ app.use(express.urlencoded({ extended: true }));
 
 // serving static files
 app.use(express.static(path.resolve(__dirname, '../build')));
-
-/**
- * define route handlers
- */
-
-// app.post('/',
-//   mediaController.addMedia,
-//   (req, res) => res.status(200).json(res.locals.mediaItem)
-// );
 app.use(cors({
   origin: '*'
 }));
 
+// Apply routers to path
 app.use('/user', userRouter);
 app.use('/api', apiRouter);
 
 
-// catch-all route handler for any requests to an unknown route
-app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
+//  Handle all unknown request
+app.use('*', (req, res) => {
+  res.status(404).send('Not Found');
+});
 
-/**
- * express error handler
- * @see https://expressjs.com/en/guide/error-handling.html#writing-error-handlers
- */
-
+//  Global Error Handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
@@ -59,9 +46,7 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-/**
- * start server
- */
+//  listen to PORT
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
