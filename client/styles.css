@@ -1,0 +1,30 @@
+.FilterBox{
+    position: center;
+    display: grid;
+    grid-template-columns: 20px, 20px, 20px;
+    grid-gap: 10px;
+    column-count: 4;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+ 
+}
+
+.card{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: lightsteelblue;
+    color: #fff;
+    padding-left: 2rem;
+    margin-bottom: .7rem;
+    border-radius: 25px;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.flex-container{
+    min-height: 60vh;
+    width: 70%;
+}

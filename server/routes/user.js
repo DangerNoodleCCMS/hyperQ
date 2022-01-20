@@ -26,8 +26,7 @@ router.post('/signup',
 router.post('/login',
     userController.login,
     cookieController.setUserIDCookie,
-    dbController.getListsDataObject,
-    (req, res) => res.status(200).json(res.locals.priorityLists));
+    (req, res) => res.status(200).json(res.locals));
 
 
 module.exports = router;

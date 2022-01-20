@@ -46,6 +46,7 @@ userController.signup = async (req, res, next) => {
 userController.login = async (req, res, next) => {
     //  Destructure and store username and password
     const { username, password } = req.body;
+    console.log(req.body);
 
     try {
         //  find user document in mongodb
@@ -65,6 +66,7 @@ userController.login = async (req, res, next) => {
 
         //  Store the user id from mongo into local
         res.locals.id = user.id;
+        res.locals.loggedIn = true;
         next();
     } catch (err) {
         console.log(err);

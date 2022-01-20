@@ -39,5 +39,11 @@ router.put('/media',
     (req, res) => res.status(200).json(res.locals.priorityLists)
 );
 
+//  Handle the get which ask for the dataObjects
+router.get('/media',
+    dbController.getListsDataObject,
+    (req, res) => res.status(200).json(res.locals.priorityLists)
+);
+
 
 module.exports = router;

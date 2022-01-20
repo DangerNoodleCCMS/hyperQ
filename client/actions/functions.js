@@ -1,6 +1,6 @@
 import { LOGIN_ACTION, LOGOUT_ACTION } from './types'
 //Sample Login Function
-export function login(data) {
+export function login(payload) {
   // return dispatch => {
   //   fetch('http://localhost:3000/sign_up', 
   //     method: 'POST',
@@ -10,10 +10,10 @@ export function login(data) {
   //     .then(res => {
   //   dispatch(type: LOGIN_ACTION, payload: {id: res.id, username: res.username}}
   // })
-  console.log("Data in functions.js", data);
+  console.log("Data in functions.js", payload);
   return {
     type: LOGIN_ACTION,
-    payload: data
+    payload: payload
   }
 }
 //Sample Logout Function
@@ -22,3 +22,4 @@ export function logout() {
 //    dispatch(type: LOGOUT_ACTION)
 //  }
 }
+
