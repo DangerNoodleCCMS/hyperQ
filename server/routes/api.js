@@ -24,6 +24,7 @@ router.post('/getList',
 
 //  Handle the request that add a particular media to data base
 router.post('/media',
+    dbController.getMediaSpecific,
     imdbController.getMediaDetail,
     dbController.createMediaMongoDoc,
     dbController.createMediaSQL,
@@ -44,6 +45,7 @@ router.get('/media',
     dbController.getListsDataObject,
     (req, res) => res.status(200).json(res.locals.priorityLists)
 );
+
 
 
 module.exports = router;

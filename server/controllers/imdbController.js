@@ -9,11 +9,15 @@ const mediaDetailUrl = 'https://imdb-api.com/en/API/Title/k_q0ismqsp/';
 
 //  Communicate with api and get the media detail
 imdbController.getMediaDetail = (req, res, next) => {
-  //  Store mediaID 
-  const { mediaId } = req.body;
+
+  //  if the document already exists, return next
+  if (res.locals.alreadyExist === true) return next();
+  
+  //  Store imdbID 
+  const { imdbID } = req.body;
 
   //  Fetch data from API
-  fetch(mediaDetailUrl + mediaId)
+  fetch(mediaDetailUrl + imdbID)
     .then(response => response.json())
     .then(data => {
       const media = {
@@ -27,7 +31,8 @@ imdbController.getMediaDetail = (req, res, next) => {
         "contentRating": data.contentRating,
         "awards": data.awards,
         "directors": data.directors.split(', '),
-        "stars": data.stars.split(', ')
+        "stars": data.stars.split(', '),
+        "imdbID": data.id
       }
 
       //  Store detail in locals

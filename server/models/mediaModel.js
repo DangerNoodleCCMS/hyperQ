@@ -15,6 +15,7 @@ const mediaSchema = new Schema({
     awards: String,
     directors: [{ type: String, required: true }],
     stars: [{ type: String, required: true }],
+    imdbID:{ type: String, required: true, unique: true }
 });
 
 
