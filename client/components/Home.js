@@ -74,7 +74,7 @@ const Home = () => {
 
   const handleDelete = (obj) => {
 
-    console.log("the priority list number is: ", e);
+    console.log("DELETE: the priority list number is: ", obj);
 
     fetch('/api/media', {
       method: 'PUT',
@@ -82,7 +82,10 @@ const Home = () => {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(data => data.json)
-      .then(data => console.log("data after deleting movie", data));
+      .then(data => {
+        console.log("data after deleting movie", data);
+        dispatch(updateMedia(data));
+      });
     
   }
 
