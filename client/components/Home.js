@@ -1,26 +1,18 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-// import Card from './Card';
-// import Options from './Options';
-
-
-// const Home = () => {
-//     return (
-//   <div>
-//     HOME PAGE
-//   </div>
-//     )
-// }
-
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Card from './Card';
 import Options from './Options';
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import Header from './Header';
 import 'styles.css';
-// import List from './List';
+import List from './List';
+import { updateMedia } from '../actions/functions';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Home = () => {
+
+  const dispatch = useDispatch();
+  const mediaList = useSelector(state => state.user.mediaList);
+
   const [checked, setChecked] = React.useState(false);
   const [checkedTwo, setCheckedTwo] = React.useState(false);
   const [checkedThree, setCheckedThree] = React.useState(false);
@@ -30,6 +22,16 @@ const Home = () => {
   const [checkedSeven, setCheckedSeven] = React.useState(false);
   const [checkedEight, setCheckedEight] = React.useState(false);
   const [checkedNine, setCheckedNine] = React.useState(false);
+
+  // on the page load fetch all the corresponding items in the list for this user
+  useEffect( () => {
+    fetch('/api/media')
+    .then(data => data.json())
+    .then(data => {
+      console.log('data from server', data);
+      dispatch(updateMedia(data));
+    })
+  },[])
 
   const handleChange = () => {
     setChecked(!checked);
@@ -66,23 +68,51 @@ const Home = () => {
     setCheckedNine(!checkedNine);
   };
 
+  const handleEdit = (e) => {
+    console.log("the priority list number is: ", e);
+  }
+
+  const handleDelete = (obj) => {
+
+    console.log("the priority list number is: ", e);
+
+    fetch('/api/media', {
+      method: 'PUT',
+      body: JSON.stringify(obj),
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(data => data.json)
+      .then(data => console.log("data after deleting movie", data));
+    
+  }
+
+
+  const lists = [];
+  for (let prior in mediaList) {
+    lists.push(<List list={mediaList[prior]} edit={handleEdit} delete={handleDelete}/>)
+  }
+
   return (
    
     <div className = "homePage" > 
-    <Card />
-    <span className = "FilterBox"> 
-      <Checkbox label="TV Show" value={checked} onChange={handleChange} />
-      <Checkbox label="Movie" value={checkedTwo} onChange={handleChangeTwo}/>
-      <Checkbox label="Action" value={checkedThree} onChange={handleChangeThree}/>
-      <Checkbox label="Comedy" value={checkedFour} onChange={handleChangeFour} />
-      <Checkbox label="Drama" value={checkedFive} onChange={handleChangeFive}/>
-      <Checkbox label="Fantasy" value={checkedSix} onChange={handleChangeSix}/>
-      <Checkbox label="Horror" value={checkedSeven} onChange={handleChangeSeven}/>
-      <Checkbox label="Mystery" value={checkedEight} onChange={handleChangeEight}/>
-      <Checkbox label="Thriller" value={checkedNine} onChange={handleChangeNine}/>
-    </span> 
-     <Options /> <Link to="/search"><img className = "navBar" src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfo2GGfKVvP2pRbnHwCVLFYiUVhhRXqQy1Zd_s1ZuQUQhW9GiXq3iD2WTHi3DlAdtba84&usqp=CAU'></img></Link>
-   </div>
+        <Card />
+        <div className = "FilterBox"> 
+        <Checkbox label="TV Show" value={checked} onChange={handleChange} />
+        <Checkbox label="Movie" value={checkedTwo} onChange={handleChangeTwo}/>
+        <Checkbox label="Action" value={checkedThree} onChange={handleChangeThree}/>
+        <Checkbox label="Comedy" value={checkedFour} onChange={handleChangeFour} />
+        <Checkbox label="Drama" value={checkedFive} onChange={handleChangeFive}/>
+        <Checkbox label="Fantasy" value={checkedSix} onChange={handleChangeSix}/>
+        <Checkbox label="Horror" value={checkedSeven} onChange={handleChangeSeven}/>
+        <Checkbox label="Mystery" value={checkedEight} onChange={handleChangeEight}/>
+        <Checkbox label="Thriller" value={checkedNine} onChange={handleChangeNine}/>
+      </div>    
+      <Options /> 
+    <div className='lists-div'>
+        {lists}
+      </div>
+    
+    </div>
   );
 };
 
@@ -95,11 +125,6 @@ const Checkbox = ({ label, value, onChange }) => {
   );
 
 };
-
-
-
-
-
 
 
 export default Home;
