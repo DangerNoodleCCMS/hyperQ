@@ -1,17 +1,28 @@
 const express = require('express');
 
+const router = express.Router();
+
+//  Import controllers
 const imdbController = require('../controllers/imdbController');
 const dbController = require('../controllers/dbController');
 
 
-// const router = express.Router();
+/************************************************/
+//////////////  route: /getMediaList /////////////
+/************************************************/
 
-
+//  Handle the request that search for movies
 router.post('/getMediaList',
     imdbController.getMovieMatches,
-    (req, res) => res.sendStatus(200)
+    (req, res) => res.status(200).json(res.locals.mediaList)
 );
 
+
+/************************************************/
+////////////////  route: /getMedia ///////////////
+/************************************************/
+
+//  Handle the request that add a particular media to data base
 router.post('/addMedia',
     imdbController.getMediaDetail,
     dbController.createMediaMongoDoc,
@@ -19,5 +30,6 @@ router.post('/addMedia',
     dbController.insertMediaPriority,
     (req, res) => res.status(200).json(res.locals.mediaDetail)
 );
+
 
 module.exports = router;

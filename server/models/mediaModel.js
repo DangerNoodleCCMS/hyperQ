@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+//  Create the media schema
 const mediaSchema = new Schema({
     title: { type: String, required: true },
     year: { type: Number, required: true },
@@ -14,5 +16,6 @@ const mediaSchema = new Schema({
     directors: [{ type: String, required: true }],
     stars: [{ type: String, required: true }],
 });
+
 
 module.exports = mongoose.model('media', mediaSchema);

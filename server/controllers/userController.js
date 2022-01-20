@@ -4,14 +4,19 @@ const db = require('../models/sqlModel');
 const userController = {};
 
 
+//  Handle sign up request
 userController.signup = async (req, res, next) => {
+    //  Destructure and store username and password
     const { username, password } = req.body;
 
     try {
         //  Create user document in mongodb
         const mongoResponse = await User.create({ username, password });
+
+        //  Store the newly created document id in locals
         res.locals.id = mongoResponse.id;
 
+        //  Create a placeholder for the priority lists
         const priorityLists = {};
 
         //  Create the three priority list for the user and store it in res.locals
@@ -26,7 +31,7 @@ userController.signup = async (req, res, next) => {
             };
         }
 
-        // console.log(priorityLists);
+        // Store the priority lists in locals
         res.locals.priorityLists = priorityLists;
         next();
     } catch (err) {
@@ -39,15 +44,17 @@ userController.signup = async (req, res, next) => {
 };
 
 userController.login = async (req, res, next) => {
+    //  Destructure and store username and password
     const { username, password } = req.body;
 
     try {
         //  find user document in mongodb
         const user = await User.findOne({ username });
 
-        //  Validate the password
+        //  Validate the password and store its result
         const isMatching = await user.validatePassword(password);
 
+        //  If password does not match pass the error object to global handler
         if(!isMatching){
             res.locals.creationErr = 'Invalid username or password';
             return next({
@@ -56,17 +63,18 @@ userController.login = async (req, res, next) => {
                       });
         } 
 
+        //  Store the user id from mongo into local
         res.locals.id = user.id;
 
-
+        //  Create a placeholder for the priority lists
         const priorityLists = {};
 
-        //  Query and get all the list of the user
+        //  Query and get all the lists and their items of the user
         const listQuery = 'SELECT pl.id, pl.name AS list_name, m.title, m.year, m.genres, m.type, m.length, mpl.priority, m.mongo_id, m.id AS SQL_id FROM priority_lists pl LEFT JOIN media_priority_lists mpl ON pl.id = mpl.list_id LEFT JOIN media m ON mpl.media_id = m.id WHERE pl.user_id = $1';
 
         const sqlResponse = await db.query(listQuery, [res.locals.id]);
 
-        //  Construct the list object ------------ To be finished
+        //  Construct the list object 
         for (let i = 0; i < sqlResponse.rows.length; i++) {
             if (priorityLists[sqlResponse.rows[i].list_name] === undefined) {
                 priorityLists[sqlResponse.rows[i].list_name] = {
@@ -95,7 +103,7 @@ userController.login = async (req, res, next) => {
             }
         }
 
-        // console.log(priorityLists);
+        //  Store the list object in local
         res.locals.priorityLists = priorityLists;
         next();
     } catch (err) {

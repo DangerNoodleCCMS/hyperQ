@@ -7,9 +7,12 @@ const imdbController = {};
 
 const mediaDetailUrl = 'https://imdb-api.com/en/API/Title/k_q0ismqsp/';
 
-//  Store userID in cookie
+//  Communicate with api and get the media detail
 imdbController.getMediaDetail = (req, res, next) => {
+  //  Store mediaID 
   const { mediaId } = req.body;
+
+  //  Fetch data from API
   fetch(mediaDetailUrl + mediaId)
     .then(response => response.json())
     .then(data => {
@@ -26,8 +29,9 @@ imdbController.getMediaDetail = (req, res, next) => {
         "directors": data.directors.split(', '),
         "stars": data.stars.split(', ')
       }
+
+      //  Store detail in locals
       res.locals.mediaDetail = media;
-      // console.log(media);
       next();
     })
     .catch(error => {
@@ -39,20 +43,26 @@ imdbController.getMediaDetail = (req, res, next) => {
     });
 }
 
+//  Communicate with API to get a list of matching media
 imdbController.getMovieMatches = (req, res, next) => {
-  //fetch all poss matches from movieImdb
-  const searchedMovie = req.params.movie;
-  const url = "https://imdb-api.com/en/API/SearchMovie/"
-  const apiKey = "k_q0ismqsp"
-  const searchedTerm = "inception"
+  //  create the url and store the key word for searching
+  const url = "https://imdb-api.com/en/API/Search/k_q0ismqsp/"
+  const searchedTerm = req.body.keywords;
 
-  axios.get(`https://imdb-api.com/en/API/Search/${apiKey}/${searchedTerm}`)
-    .then((res) => {
-      console.log(res.data);
-      console.log(res.data.results);
-      // res.locals.matches = res.data.results;
+  //fetch all possible matches from movieImdb
+  axios.get(url + searchedTerm)
+    .then((response) => {
+      //  Store response result in locals
+      res.locals.mediaList = response.data.results;
       next();
     })
+    .catch(error => {
+      console.log('error at imdbController.getMovieMatches', error);
+      return next({
+        log: 'Express error handler caught in imdbController.getMovieMatches error',
+        message: { err: 'An error occurred' }
+      });
+    });
 }
 
 

@@ -3,7 +3,9 @@ const sql = require('../models/sqlModel');
 
 const dbController = {};
 
+//  Handle request for creating media doc in Mongodb
 dbController.createMediaMongoDoc = (req, res, next) => {
+    //  creating media doc in Mongodb
     mongo.create(res.locals.mediaDetail)
         .then((response) => {
             //  Store the newly generated document's id
@@ -20,6 +22,7 @@ dbController.createMediaMongoDoc = (req, res, next) => {
         });
 }
 
+//  Handle request for creating the media in SQL
 dbController.createMediaSQL = (req, res, next) => {
     //  Create the data for query
     const data = [
@@ -51,10 +54,12 @@ dbController.createMediaSQL = (req, res, next) => {
         });
 }
 
+//  Handle request for adding a particular media to the priority list 
 dbController.insertMediaPriority = (req, res, next) => {
     //  Create query string
     const insertMediaPriority = 'INSERT INTO media_priority_lists (list_id, media_id, priority) VALUES ($1, $2, $3)';
 
+    //  Insert the media into media prioity lists table
     sql.query(insertMediaPriority, [req.body.listId, res.locals.sqlId, req.body.length])
         .then(() => next())
         // if an error occur, pass to global error handler
