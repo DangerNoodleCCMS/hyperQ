@@ -12,23 +12,31 @@ const dbController = require('../controllers/dbController');
 /************************************************/
 
 //  Handle the request that search for movies
-router.post('/getMediaList',
+router.post('/getList',
     imdbController.getMovieMatches,
     (req, res) => res.status(200).json(res.locals.mediaList)
 );
 
 
 /************************************************/
-////////////////  route: /getMedia ///////////////
+//////////////////  route: /media ////////////////
 /************************************************/
 
 //  Handle the request that add a particular media to data base
-router.post('/addMedia',
+router.post('/media',
     imdbController.getMediaDetail,
     dbController.createMediaMongoDoc,
     dbController.createMediaSQL,
     dbController.insertMediaPriority,
-    (req, res) => res.status(200).json(res.locals.mediaDetail)
+    dbController.getListsDataObject,
+    (req, res) => res.status(200).json(res.locals.priorityLists)
+);
+
+//  Handle the request that remove a particular media from data base
+router.put('/media',
+    dbController.deleteMediaPriority,
+    dbController.getListsDataObject,
+    (req, res) => res.status(200).json(res.locals.priorityLists)
 );
 
 

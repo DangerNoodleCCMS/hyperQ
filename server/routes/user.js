@@ -4,7 +4,8 @@ const router = express.Router();
 
 //  Import controllers
 const userController = require('../controllers/userController');
-const cookieController = require('../controllers/cookieController')
+const cookieController = require('../controllers/cookieController');
+const dbController = require('../controllers/dbController');
 
 /************************************************/
 /////////////////  route: /signup ////////////////
@@ -25,6 +26,7 @@ router.post('/signup',
 router.post('/login',
     userController.login,
     cookieController.setUserIDCookie,
+    dbController.getListsDataObject,
     (req, res) => res.status(200).json(res.locals.priorityLists));
 
 

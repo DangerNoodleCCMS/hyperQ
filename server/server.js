@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 const app = express();
@@ -17,6 +18,7 @@ mongoose.connect(MONGO_URI, { dbName: 'iterationProject' });
 // handle parsing request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // serving static files
 app.use(express.static(path.resolve(__dirname, '../build')));
