@@ -3,6 +3,8 @@ import Card from './Card';
 import Options from './Options';
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import DisplayMovieOption from "./DisplayMovieOption";
+import './Search.css'; 
+import { useSelector } from 'react-redux';
 
 //temporary data for testing ...remove after connecting to backend
 const fakeArr = [
@@ -26,37 +28,44 @@ const fakeArr = [
 "image": "https://imdb-api.com/images/original/MV5BMjE0NGIwM2EtZjQxZi00ZTE5LWExN2MtNDBlMjY1ZmZkYjU3XkEyXkFqcGdeQXVyNjMwNzk3Mjk@._V1_Ratio0.7273_AL_.jpg",
 "title": "Inception: Motion Comics",
 "description": "(2010) (Video)"
-}]
+}
+]
 
 const Search = () => {
 
+  const mediaList = useSelector(state => state.user.mediaList);
+
   const [searchedMovie, setSearchedMovie] = useState('');
-  const [matches, setMatches] = useState(fakeArr);
+  const [matches, setMatches] = useState([]);
 
   const [choice, setChoice] = useState({
     id: "", 
-    priority: ""
+    priority: "",
+    img: ""
   })
 
 
  function saveCheckbox(id){
-   alert(id)
+  //  alert(id)
    const p = choice.priority;
-    setChoice({id:id, priority: p})
-     
+    setChoice({...choice, id:id})   
  }
 
- function savePrio(priority){
-  const i=choice.id;
-  setChoice({id: i, priority: priority})
- }
+  function savePrio(prior, image){
+    const i=choice.id;
+    console.log('AAAA', prior)
+    setChoice({...choice, priority: prior, img: image})
+   
+  }
+
+  function saveImg(img){
+    setChoice({...choice, img: img})
+  }
 
   function handleChange(e){
     const {name, value} = e.target;
     setSearchedMovie(value)
   }
-
-
 
   function handleSubmit(e){
     e.preventDefault();
@@ -65,78 +74,100 @@ const Search = () => {
       alert("Please enter a movie to search");
     
     } else {
-      alert("Searching your movie")
-    
-
-    
-  
-    
-
-    fetch(`/getList`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({keywords: searchedMovie}),
-    })
-      .then((response) => {
-        
-       setMatches(response)
-    })
-    }//end else 
+      console.log("Searching your movie");
+      fetch(`/api/getList`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({keywords: searchedMovie}),
+      })
+        .then(data => data.json())
+        .then(data => {
+          console.log("imdb api results", data);
+          if (data.length > 0 && data !== null){
+            setMatches(data);
+          }else setMatches([{id:0, title:'No result found', img:'NA'}]);
+        });
+    } 
   }
 
-
   function handleChoiceSubmit(e){
-      e.preventDefault();
-      if(!choice.id){
-        alert("you must make a selection")
-      } else{
-        
-        alert(choice.priority)
 
-     fetch(`/media`, {
+    console.log( "GETTING STUFF FROM STATE", 
+          mediaList.priority1.items.length,
+          mediaList.priority2.items.length,
+          mediaList.priority3.items.length);
+
+    
+
+
+    console.log('choice', choice);
+
+    let key = 'priority';
+    const length = mediaList[key+choice.priority].items.length;
+    // let length = 0;
+    // if (choice.priority == 1) {
+    //   length = mediaList.priority1.items.length;
+    // }
+    // else if (choice.priority == 2) {
+    //   length = mediaList.priority2.items.length;
+    // }
+    // else if (choice.priority == 3) {
+    //   length = mediaList.priority3.items.length;
+    // }
+
+    console.log("length", length);
+
+    const obj = {
+      imdbID: choice.id,
+      image: choice.img,
+      listId: mediaList[key+choice.priority].id,
+      length: length}
+
+    console.log("OBJECT", obj);
+
+    e.preventDefault();
+    if(!choice.id){
+      alert("you must make a selection")
+    } else {
+      console.log("priority", choice.priority);
+
+      fetch(`/api/media`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({mediaId: choice.id}),
+      body: JSON.stringify(obj),
       //send the image link as well
       
-    })
-      .then((response) => {
-       
-       //when backend sends back priority list object then update redux state here
-  })
+      })
+      .then((data) => {
+        data.json()
+      })
+      .then(data => console.log("555555", data))
 
-      }
+  }
       
-    }
+  }
 
-  const movieComponents = matches.map(movie => <DisplayMovieOption key={movie.id} movie={movie} saveCheckbox={saveCheckbox} savePrio={savePrio}/>)
+  let movieComponents = matches.map(movie => <DisplayMovieOption key={movie.id} movie={movie} saveCheckbox={saveCheckbox} savePrio={savePrio}/>)
 
 
-    return (
-  <div className = "searchPage">
 
-    <input name='keywords' 
-    type ='text' 
-    value ={searchedMovie} 
-    className = 'newMovie' 
-    onChange ={handleChange} />
-
-    <button className = 'searchButton'
-    onClick={handleSubmit}>Search Button</button>
-
-     <h2>Select your movie</h2>
-     <button className="" onClick={handleChoiceSubmit}>Submit Choice </button>
-     {movieComponents}
-   
-  </div>
-    )
-    }
-
+  return (
+    <div className = "searchPage">
+    <h1 className = "SearchMovies">Search for All Your favorite Movies and TV Shows</h1>
+      <input name='keywords' type ='text' value ={searchedMovie} className = 'newMovie' onChange ={handleChange} />
+      <button className = 'searchButton' onClick={handleSubmit}>Search Button</button>
+      <button className="submitChoice" onClick={handleChoiceSubmit}>Submit Choice </button>
+      
+      {movieComponents}
+    
+    </div>
+  )
+}
 
 export default Search;

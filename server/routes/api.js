@@ -47,5 +47,15 @@ router.get('/media',
 );
 
 
+/************************************************/
+//////////////////  route: /media ////////////////
+/************************************************/
+
+//  Handle the get which ask for the modal detail
+router.post('/modal',
+    dbController.getMediaSpecific,
+    (req, res) => res.status(200).json(res.locals.mongoData)
+);
+
 
 module.exports = router;
