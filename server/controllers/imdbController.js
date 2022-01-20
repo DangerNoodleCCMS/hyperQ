@@ -14,7 +14,7 @@ imdbController.getMediaDetail = (req, res, next) => {
   if (res.locals.alreadyExist === true) return next();
   
   //  Store imdbID 
-  const { imdbID } = req.body;
+  const { imdbID, image } = req.body;
 
   //  Fetch data from API
   fetch(mediaDetailUrl + imdbID)
@@ -32,9 +32,11 @@ imdbController.getMediaDetail = (req, res, next) => {
         "awards": data.awards,
         "directors": data.directors.split(', '),
         "stars": data.stars.split(', '),
-        "imdbID": data.id
+        "imdbID": data.id,
+        "posterUrl": image
       }
 
+      // console.log(media);
       //  Store detail in locals
       res.locals.mediaDetail = media;
       next();

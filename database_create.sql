@@ -5,7 +5,8 @@ CREATE TABLE "media"(
     "genres" VARCHAR(255) NOT NULL,
     "type" VARCHAR(255) NOT NULL,
     "length" INTEGER NOT NULL,
-    "mongo_id" VARCHAR(255) NOT NULL
+    "mongo_id" VARCHAR(255) NOT NULL,
+    "poster_url" VARCHAR(255)
 );
 
 CREATE TABLE "priority_lists"(

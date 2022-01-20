@@ -8,6 +8,7 @@ dbController.createMediaMongoDoc = (req, res, next) => {
     //  if the document already exists, return next
     if (res.locals.alreadyExist === true) return next();
 
+    // console.log('hi');
     //  creating media doc in Mongodb
     mongo.create(res.locals.mediaDetail)
         .then((response) => {
@@ -37,11 +38,12 @@ dbController.createMediaSQL = (req, res, next) => {
         res.locals.mediaDetail.genres,
         res.locals.mediaDetail.type,
         res.locals.mediaDetail.runtimeMins,
-        res.locals.mongoId
+        res.locals.mongoId,
+        res.locals.mediaDetail.posterUrl
     ];
 
     //  Create query string
-    const insertMedia = 'INSERT INTO media (title, year, genres, type, length, mongo_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id';
+    const insertMedia = 'INSERT INTO media (title, year, genres, type, length, mongo_id, poster_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id';
 
     sql.query(insertMedia, data)
         .then((response) => {
@@ -122,7 +124,7 @@ dbController.getListsDataObject = async (req, res, next) => {
 
     try {
         //  Query and get all the lists and their items of the user
-        const listQuery = 'SELECT pl.id, pl.name AS list_name, m.title, m.year, m.genres, m.type, m.length, mpl.priority, m.mongo_id, m.id AS SQL_id FROM priority_lists pl LEFT JOIN media_priority_lists mpl ON pl.id = mpl.list_id LEFT JOIN media m ON mpl.media_id = m.id WHERE pl.user_id = $1';
+        const listQuery = 'SELECT pl.id, pl.name AS list_name, m.title, m.year, m.genres, m.type, m.length, mpl.priority, m.mongo_id, m.id AS SQL_id, m.poster_url FROM priority_lists pl LEFT JOIN media_priority_lists mpl ON pl.id = mpl.list_id LEFT JOIN media m ON mpl.media_id = m.id WHERE pl.user_id = $1';
 
         const sqlResponse = await sql.query(listQuery, [res.locals.id]);
 
@@ -151,6 +153,7 @@ dbController.getListsDataObject = async (req, res, next) => {
                     "priority": sqlResponse.rows[i].priority,
                     "SQLId": sqlResponse.rows[i].sql_id,
                     "mongoId": sqlResponse.rows[i].mongo_id,
+                    "posterUrl": sqlResponse.rows[i].poster_url
                 };
                 priorityLists[sqlResponse.rows[i].list_name].items.push(item);
             }
