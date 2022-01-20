@@ -1,0 +1,58 @@
+.searchButton{
+    background-color: rgb(223, 81, 81);
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+} 
+.searchPage{
+    background-image: url('https://whatsupgermany.de/wp-content/uploads/2016/12/5-Film-reel.gif');
+    height:100%;
+    width:100%;
+
+}
+.searchButton{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 30px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 8%;
+    top: 220;
+    left: 800;
+    transform: translate(-50%,-50%);
+
+}
+
+.SearchMovies{
+    color:#7fbedb; 
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    position: relative;
+
+}
+
+input{
+	border: none;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 30px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 8%;
+    top: 220;
+    left: 800;
+    transform: translate(-50%,-50%);
+
+}

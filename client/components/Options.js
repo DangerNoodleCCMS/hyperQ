@@ -1,14 +1,3 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
-// const Options = () => {
-//     return (
-//   <div>
-//       <Card />
-//       Options
-//   </div>
-//     )
-// }
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'

@@ -95,9 +95,8 @@ const Home = () => {
   return (
    
     <div className = "homePage" > 
-
-      <Card />
-      <span className = "FilterBox"> 
+        <Card />
+        <div className = "FilterBox"> 
         <Checkbox label="TV Show" value={checked} onChange={handleChange} />
         <Checkbox label="Movie" value={checkedTwo} onChange={handleChangeTwo}/>
         <Checkbox label="Action" value={checkedThree} onChange={handleChangeThree}/>
@@ -107,10 +106,9 @@ const Home = () => {
         <Checkbox label="Horror" value={checkedSeven} onChange={handleChangeSeven}/>
         <Checkbox label="Mystery" value={checkedEight} onChange={handleChangeEight}/>
         <Checkbox label="Thriller" value={checkedNine} onChange={handleChangeNine}/>
-      </span> 
-      <Options /> <Link to="/search"><img className = "navBar" src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfo2GGfKVvP2pRbnHwCVLFYiUVhhRXqQy1Zd_s1ZuQUQhW9GiXq3iD2WTHi3DlAdtba84&usqp=CAU'></img></Link>
-      
-      <div className='lists-div'>
+      </div>    
+      <Options /> 
+    <div className='lists-div'>
         {lists}
       </div>
     

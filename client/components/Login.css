@@ -1,0 +1,98 @@
+.login{
+    background-image: url("https://i.pinimg.com/originals/0a/3e/64/0a3e64dd1326ebb070217907357b3665.gif");
+    height:100%;
+    width:100%;
+}
+
+h1{
+    color:rgb(223, 81, 81); 
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    position: relative;
+    top: 100;
+}
+.password{
+    border-radius: 50%;
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 10%;
+    top: 220;
+    left: 930;
+    transform: translate(-50%,-50%);
+   
+}
+
+.signUp{
+    border-radius: 50%;
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 10%;
+    top: 550;
+    left: 1400;
+    transform: translate(-50%,-50%);
+
+}
+::placeholder{
+    color: white;
+}
+
+.username{
+    border-radius: 50%;
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 10%;
+    top: 200;
+    left: 930;
+    transform: translate(-50%,-50%);
+   
+}
+.loginButton{
+    border-radius: 50%;
+    background-color: rgb(223, 81, 81);
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 10%;
+    height: 10%;
+    top: 250;
+    left: 930;
+    transform: translate(-50%,-50%);
+}

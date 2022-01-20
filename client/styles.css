@@ -1,22 +1,39 @@
-.FilterBox{
+
+.FilterBox{    
+    font-size: 22px;
     position: center;
-    display: grid;
-    grid-template-columns: 20px, 20px, 20px;
-    grid-gap: 10px;
+     display: grid;
+    grid-template-columns: 5px, 5px, 5px;
+    grid-gap: 10px;  
+    z-index: 9999;
+    /* background-color:rgb(223, 81, 81); 
+    p;
     column-count: 4;
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
- 
+    */
 }
 
+.navBar{
+    border-radius: 50%;
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
 .card{
     width: 90%;
     margin: auto;
     display: flex;
     flex-direction: column;
-    background-color: lightsteelblue;
+    background-color: rgb(142, 190, 253);
     color: #fff;
     padding-left: 2rem;
     margin-bottom: .7rem;
@@ -29,8 +46,68 @@
     width: 70%;
 }
 
-.lists-div {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
+.netflix{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    bottom:500px;
+}
+.hulu{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    bottom:500px;
+}
+.hbo{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    bottom:500px;
+}
+.amazon{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    bottom:500px;
+}
+.disney{
+    background-color: rgb(223, 81, 81); 
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+    bottom:500px; 
 }
