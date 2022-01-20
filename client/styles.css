@@ -28,3 +28,9 @@
     min-height: 60vh;
     width: 70%;
 }
+
+.lists-div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}

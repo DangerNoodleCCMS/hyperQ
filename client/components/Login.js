@@ -13,8 +13,6 @@ const Login = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    
-    
     fetch('/user/login', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -24,6 +22,7 @@ const Login = () => {
     .then(data => {
       console.log('data from server', data);
       if (data.loggedIn) {
+        dispatch(login({id: 222, username: user.username}));
         navigate('/home')
       } else {
         console.log("FAILED");
@@ -34,7 +33,8 @@ const Login = () => {
 
   return (
     <div>
-      <div>
+      <form onSubmit={handleClick}>
+        <div>
           <label>Username:</label>
           <input type='text' onChange={e => setUser({...user, username: e.target.value})}></input>
         </div>
@@ -43,8 +43,9 @@ const Login = () => {
           <input type='text' onChange={e => setUser({...user, password: e.target.value})}></input>
         </div>
         <div>
-          <button onClick={handleClick}>Submit</button>
+          <button >Submit</button>
         </div>
+      </form>
       {/* <Link to="/home" onClick={handleClick}><img className = "homepageButton" src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfo2GGfKVvP2pRbnHwCVLFYiUVhhRXqQy1Zd_s1ZuQUQhW9GiXq3iD2WTHi3DlAdtba84&usqp=CAU'></img></Link> */}
     </div>
   )
