@@ -162,3 +162,95 @@ li{
 	border-color:rgb(142, 190, 253);  
 }
 
+
+
+/* ============================================================================================================================================================ */
+.bg{
+	background-color: #333;
+	color: #fff;
+	width: 30%;
+	height: 150px;
+	padding: 1rem;
+	margin-top: 2%;
+	display: flex;
+	justify-content: center;
+  }
+  
+  .cont{
+	width: 20%;
+	margin: 5% auto;
+  }
+  
+  
+  .img-btn{
+	background-color: green;
+	padding: .6rem .5rem; 
+	color: #fff;
+	font-size: 17px;
+	border-radius: 5px;
+	margin: 0 auto;
+  
+  }
+  .img-btn:hover{
+	cursor: pointer;
+  }
+  
+  
+  .modal-cont{
+	/* background-color: yellow; */
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left:0;
+	display: flex; 
+	justify-content: center;
+	/*using flex just so we can align the child (modal card) inside of it */
+	align-items: center;
+	position: absolute;
+  }
+  
+  .modal-card{
+	background-color: olive;
+	width: 80%;
+	height: 80%;
+	/* text-align: center;  */
+	font-size: 19px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  
+  
+  }
+  
+  .relative{
+	position: relative; 
+  }
+  
+  .close-btn{
+	width: 3rem;
+	height: 3rem; 
+	border-radius: 50%;
+	background-color: red;
+	color: #fff;
+	position: absolute; 
+	top: 0;
+	right: 0;
+	font-size: 27px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	transform: translate(30%, -30%)
+	
+  }
+  
+  .close-btn:hover{
+	cursor: pointer;
+  }
+  
+  .modal-img{
+	height: 300px;
+	width: 300px;
+	margin-right: 2rem;
+  }

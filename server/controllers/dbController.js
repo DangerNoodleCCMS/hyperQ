@@ -196,4 +196,29 @@ dbController.getMediaSpecific = (req, res, next) => {
 }
 
 
+//  Get the corresponding document from mongo given the imdb id
+dbController.getModalSpecific = (req, res, next) => {
+    //  Store imdbID 
+    const { mongoId } = req.body;
+
+    mongo.findOne({ "id": mongoId })
+        .then((response) => {
+            if (response !== null) {
+                //  create a key to indicate the document already exists
+                res.locals.alreadyExist = true;
+                res.locals.mongoId = response.id;
+                res.locals.mongoData = response;
+            }
+            next();
+        })
+        .catch(error => {
+            console.log('error at dbController.getMediaSpecific', error);
+            return next({
+                log: 'Express error handler caught in dbController.getMediaSpecific error',
+                message: { err: 'An error occurred' }
+            });
+        });
+}
+
+
 module.exports = dbController;

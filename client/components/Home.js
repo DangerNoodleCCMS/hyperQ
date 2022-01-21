@@ -56,8 +56,12 @@ const Home = () => {
       // console.log(listName);
       // console.log(mediaList[listName]);
       // console.log('medialist', mediaList);
-      lists.push(<List list={mediaList[listName]} delete={handleDelete} />)
+      lists.push(<List list={mediaList[listName]} delete={handleDelete} filter={filter}/>)
     }
+  }
+
+  const handleChange = (e) => {
+    setFilter(e.target.value)
   }
 
   return (
@@ -67,12 +71,13 @@ const Home = () => {
       {/* <Checkbox label={'action'} value={'action'} onChange={}/> */}
       <Card />
       <div className='genre'>
-        <select className='genre-select' onChange={e => setFilter(e.target.value)}>
+        <select className='genre-select' onChange={ handleChange }>
+          <option value=''></option>
           <option value='Action'>Action</option>
           <option value='Comedy'>Comedy</option>
-          <option value='Sci-fi'>Sci-fi</option>
+          <option value='Sci-Fi'>Sci-Fi</option>
         </select>
-        <button className='genre-submit' onClick={handleSubmit}>Submit</button>
+        {/* <button className='genre-submit' onClick={handleSubmit}>Submit</button> */}
       </div>
 
       <div className='lists-div'>

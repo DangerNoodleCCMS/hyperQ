@@ -6,7 +6,7 @@
 	text-align: center;
 } 
 .searchPage{
-    background-color:  rgb(212, 201, 99); 
+    background-image: url('https://ak.picdn.net/shutterstock/videos/1030557311/thumb/1.jpg?ip=x480');
     height:100%;
     width:100%;
 }
@@ -16,7 +16,7 @@ h1{
 }
 
 .reels{
-    background-color: rgb(212, 201, 99);
+    background-image: url('https://ak.picdn.net/shutterstock/videos/1030557311/thumb/1.jpg?ip=x480');
     height:100%;
     width:100%;
 }
@@ -92,7 +92,7 @@ input{
     padding: 10px;
 }
 .SearchMovies{
-    color:#7fbedb; 
+    color:rgb(223, 81, 81); 
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;

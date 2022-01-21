@@ -53,7 +53,7 @@ router.get('/media',
 
 //  Handle the get which ask for the modal detail
 router.post('/modal',
-    dbController.getMediaSpecific,
+    dbController.getModalSpecific,
     (req, res) => res.status(200).json(res.locals.mongoData)
 );
 
