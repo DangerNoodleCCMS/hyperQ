@@ -1,4 +1,4 @@
-import { LOGIN_ACTION, LOGOUT_ACTION } from './types'
+import { LOGIN_ACTION, LOGOUT_ACTION, UPDATE_MEDIA } from './types'
 //Sample Login Function
 export function login(payload) {
   // return dispatch => {
@@ -21,5 +21,12 @@ export function logout() {
 //  return => {
 //    dispatch(type: LOGOUT_ACTION)
 //  }
+}
+
+export function updateMedia(data) {
+  return {
+    type: UPDATE_MEDIA,
+    payload: data
+  }
 }
 

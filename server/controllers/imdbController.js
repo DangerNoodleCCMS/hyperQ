@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const imdbController = {};
 
-const mediaDetailUrl = 'https://imdb-api.com/en/API/Title/k_q0ismqsp/';
+const mediaDetailUrl = 'https://imdb-api.com/en/API/Title/k_608j7geh/';
 
 //  Communicate with api and get the media detail
 imdbController.getMediaDetail = (req, res, next) => {
@@ -15,6 +15,7 @@ imdbController.getMediaDetail = (req, res, next) => {
   
   //  Store imdbID 
   const { imdbID, image } = req.body;
+  console.log(req.body);
 
   //  Fetch data from API
   fetch(mediaDetailUrl + imdbID)
@@ -53,7 +54,7 @@ imdbController.getMediaDetail = (req, res, next) => {
 //  Communicate with API to get a list of matching media
 imdbController.getMovieMatches = (req, res, next) => {
   //  create the url and store the key word for searching
-  const url = "https://imdb-api.com/en/API/Search/k_q0ismqsp/"
+  const url = "https://imdb-api.com/en/API/Search/k_608j7geh/"
   const searchedTerm = req.body.keywords;
 
   //fetch all possible matches from movieImdb
