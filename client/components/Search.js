@@ -88,7 +88,7 @@ const Search = () => {
           console.log("imdb api results", data);
           if (data.length > 0 && data !== null){
             setMatches(data);
-          }else setMatches([{id:0, title:'No result found', img:'NA'}]);
+          }else setMatches([{id:0, title:'No result found', image:'NA'}]);
         });
     } 
   }
@@ -160,12 +160,12 @@ const Search = () => {
   return (
     <div className = "searchPage">
     <h1 className = "SearchMovies">Search for All Your favorite Movies and TV Shows</h1>
-      <input name='keywords' type ='text' value ={searchedMovie} className = 'newMovie' onChange ={handleChange} />
-      <button className = 'searchButton' onClick={handleSubmit}>Search Button</button>
+      <input className = "keywords" name='keywords' type ='text' value ={searchedMovie} className = 'newMovie' onChange ={handleChange} />
+      <button className = 'searchButton' onClick={handleSubmit}>Search</button>
       <button className="submitChoice" onClick={handleChoiceSubmit}>Submit Choice </button>
-      
+      <h2 className ="movieComponents">
       {movieComponents}
-    
+     </h2>
     </div>
   )
 }

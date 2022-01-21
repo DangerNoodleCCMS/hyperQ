@@ -24,13 +24,13 @@ h1{
 	font-size: 16px;
 	margin: 4px 2px;
 	cursor: pointer;
-    position: relative;
+    position: relative, 50%;
     width: 15%;
     height: 10%;
     top: 220;
     left: 930;
     transform: translate(-50%,-50%);
-   
+  
 }
 
 .signUp{

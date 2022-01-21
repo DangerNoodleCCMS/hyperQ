@@ -1,18 +1,58 @@
 
-.FilterBox{    
+.FilterBox{  
     font-size: 22px;
+	color: white;
     position: center;
-     display: grid;
-    grid-template-columns: 5px, 5px, 5px;
-    grid-gap: 10px;  
+    display: flex;
     z-index: 9999;
-    /* background-color:rgb(223, 81, 81); 
-    p;
-    column-count: 4;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    */
+	background-color: rgb(223, 209, 81); 
+	width: 30%;
+    margin: auto;
+    flex-direction: column;
+    padding-left: 2rem;
+    margin-bottom: .7rem;
+    border-radius: 25px;
+    padding-bottom: 1rem;
+	column-count: 2;
+	font-family:'Courier New', Courier, monospace;
+
+}
+
+li{
+	list-style-type: none;
+	
+}
+
+.lists-div{
+
+	display: flex;
+	flex-direction: row;
+	border-color: none;
+	font-size: 22px;
+	color: white;
+    position: center; 
+    z-index: 9999;
+	background-color: rgb(223, 209, 81); 
+	width: 80%;
+    margin: auto;
+	border-color:rgb(142, 190, 253);
+    padding-left: 2rem;
+    margin-bottom: .7rem;
+    border-radius: 25px;
+    padding-bottom: 1rem;
+	column-count: 2;
+	text-align: center;
+	font-family:'Courier New', Courier, monospace;
+
+}
+.filterButton{
+	font-family:  'Courier New', Courier, monospace;
+	position: center;
+	background-color: rgb(223, 209, 81);
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	font-size: 22px;
 }
 
 .navBar{
@@ -98,7 +138,7 @@
 	cursor: pointer;
     bottom:500px;
 }
-.disney{
+.disney, .genre-select{
     background-color: rgb(223, 81, 81); 
 	border: none;
 	color: white;
@@ -111,3 +151,14 @@
 	cursor: pointer;
     bottom:500px; 
 }
+
+.genre{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.homePage{
+	background-image: url('https://ih1.redbubble.net/image.1399850632.3485/st,small,507x507-pad,600x600,f8f8f8.u1.jpg');
+	border-color:rgb(142, 190, 253);  
+}
+

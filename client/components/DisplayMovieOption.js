@@ -43,28 +43,41 @@ if(priority){
   }
 
   //notify parent component that checkmark happened
+  const imgtag = [];
+  const scrollbox = [];
+  const checkbox = [];
+  console.log(image);
+  if (image !== 'NA') {
+    imgtag.push(<img className="options-img" src={image} />);
+    scrollbox.push(<select
+      className="priority-drop inline"
+      name="priority"
+      value={priority}
+      onChange={handlePriorityChange}
+    >
+      <option value="">Priority </option>
+      <option value="1">1 </option>
+      <option value="2">2 </option>
+      <option value="3">3</option>
+    
+    </select>);
+    checkbox.push(<input className="inline" type="checkbox" checked={checked} onChange={handleCheckbox} />);
+    console.log('hi');
+  } 
 
   return(
+    <div className = "reels"> 
+    <div className = "imageAndCheckbox">
     <div className="options-cont">
-    <input className="inline" type="checkbox" checked={checked} onChange={handleCheckbox} />
-
+    
+    {checkbox}
     <div className="inline movie-snap">
     <h3>{title}</h3>
-    <img className="options-img" src={image} />
+    {imgtag}
    </div>
-
-     <select
-            className="priority-drop inline"
-            name="priority"
-            value={priority}
-            onChange={handlePriorityChange}
-          >
-            <option value="">Priority </option>
-            <option value="1">1 </option>
-            <option value="2">2 </option>
-            <option value="3">3</option>
-          
-          </select>
+   </div>
+    </div>
+     {scrollbox}
 
 
     </div>

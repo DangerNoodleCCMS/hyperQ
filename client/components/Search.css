@@ -6,10 +6,27 @@
 	text-align: center;
 } 
 .searchPage{
-    background-image: url('https://whatsupgermany.de/wp-content/uploads/2016/12/5-Film-reel.gif');
+    background-color:  rgb(212, 201, 99); 
     height:100%;
     width:100%;
+}
 
+h1{
+    position:center;
+}
+
+.reels{
+    background-color: rgb(212, 201, 99);
+    height:100%;
+    width:100%;
+}
+
+.movieComponents{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	order: 5;
+	
 }
 .searchButton{
     background-color: rgb(223, 81, 81); 
@@ -29,9 +46,9 @@
     transform: translate(-50%,-50%);
 
 }
-.submitChoice{
-    color:white; 
-    background-color: rgb(223, 81, 81); 
+input{
+    color:black; 
+    background-color: white; 
 	border: none;
 	padding: 15px 32px;
 	text-align: center;
@@ -41,18 +58,15 @@
 	margin: 4px 2px;
 	cursor: pointer;
     position: relative;
-
+    width: 15%;
+    height: 8%;
+    top: 220;
+    left: 800;
+    transform: translate(-50%,-50%);
 }
-.SearchMovies{
-    color:#7fbedb; 
-    font-size: 40px;
-    font-family: 'Courier New', Courier, monospace;
-    text-align: center;
-    position: relative;
-
-}
-
-input{
+.submitChoice{
+    color:white; 
+    background-color: rgb(223, 81, 81); 
 	border: none;
 	padding: 15px 32px;
 	text-align: center;
@@ -68,4 +82,82 @@ input{
     left: 800;
     transform: translate(-50%,-50%);
 
+}
+
+.options-cont{
+	display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-columns: 100px 300px;
+    grid-gap: 10px;
+    padding: 10px;
+}
+.SearchMovies{
+    color:#7fbedb; 
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    position: relative;
+
+}
+  .imageAndCheckbox {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-columns: 100px 300px;
+    grid-gap: 10px;
+    padding: 10px;
+  }
+
+.imageAndCheckbox > div {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+
+.inline{
+	border: none;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 30px;
+	margin: 4px 2px;
+	cursor: pointer;
+    position: relative;
+    width: 15%;
+    height: 8%;
+    top: 220;
+    left: 800;
+    transform: translate(-50%,-50%);
+
+ }
+
+
+.title{
+    background-color: rgb(223, 81, 81); ;
+}
+.options-img{
+    height: 300px;
+    width: 250px;
+  }
+  
+
+  .priority-drop{
+    height: 3rem;
+    width: 6rem;
+    padding: 5px;
+    font-size: 13px;
+    margin-bottom: 3%;
+    margin-left: 4%;
+    background-color: rgb(223, 81, 81); 
+    color: #fff;
+    border: 1px solid #fff;
+  } 
+
+.genre-submit {
+  background-color: rgb(223, 81, 81);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
 }
