@@ -31,6 +31,7 @@ if(priority){
    
     setChecked(!checked); //??? should checkbx val be in state?
     //  alert(checked) 
+
   
   }
 
@@ -38,6 +39,7 @@ if(priority){
     const { value } = e.target;
     
     // alert(value)
+
     
     setPriority(value);
   }
@@ -78,6 +80,7 @@ if(priority){
    </div>
     </div>
      {scrollbox}
+
 
 
     </div>

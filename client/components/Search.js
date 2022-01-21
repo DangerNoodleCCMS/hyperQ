@@ -6,6 +6,7 @@ import DisplayMovieOption from "./DisplayMovieOption";
 import './Search.css'; 
 import { useSelector } from 'react-redux';
 
+
 //temporary data for testing ...remove after connecting to backend
 const fakeArr = [
 {
@@ -28,6 +29,7 @@ const fakeArr = [
 "image": "https://imdb-api.com/images/original/MV5BMjE0NGIwM2EtZjQxZi00ZTE5LWExN2MtNDBlMjY1ZmZkYjU3XkEyXkFqcGdeQXVyNjMwNzk3Mjk@._V1_Ratio0.7273_AL_.jpg",
 "title": "Inception: Motion Comics",
 "description": "(2010) (Video)"
+
 }
 ]
 
@@ -42,6 +44,7 @@ const Search = () => {
     id: "", 
     priority: "",
     img: ""
+
   })
 
 
@@ -61,6 +64,7 @@ const Search = () => {
   function saveImg(img){
     setChoice({...choice, img: img})
   }
+
 
   function handleChange(e){
     const {name, value} = e.target;
@@ -135,6 +139,7 @@ const Search = () => {
       console.log("priority", choice.priority);
 
       fetch(`/api/media`, {
+
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -169,5 +174,6 @@ const Search = () => {
     </div>
   )
 }
+
 
 export default Search;
